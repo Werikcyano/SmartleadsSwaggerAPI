@@ -1,0 +1,2242 @@
+openapi: 3.0.0
+info:
+  title: Smartleads Swagger API
+  description: Documentação da API do Smartleads usando Swagger
+  version: 1.0.0
+servers:
+- url: http://localhost:3333
+tags:
+- name: Cliente
+  description: Operações relacionadas a clientes
+- name: Empresas
+  description: Operações relacionadas a empresas
+- name: Lead
+  description: Operações relacionadas a leads
+- name: Parâmetros de Busca
+  description: Operações relacionadas a parâmetros de busca
+- name: cargonaempresa
+  description: Operações relacionadas a cargos na empresa
+- name: ContasLinkedInAdmin
+  description: Operações relacionadas a contas LinkedIn de administradores
+- name: EmailsEmpresa
+  description: Operações relacionadas a emails de empresas
+- name: EmailsProvaveis
+  description: Operações relacionadas a emails prováveis
+- name: Especializações de Empresas
+  description: Operações relacionadas a especializações de empresas
+- name: Experiências na Empresa
+  description: Operações relacionadas a experiências na empresa
+- name: Formações
+  description: Operações relacionadas a formações
+- name: Grupos de Clientes
+  description: Operações relacionadas a grupos de clientes
+- name: Grupos de Leads
+  description: Operações relacionadas a grupos de leads
+- name: Horários de Empresas
+  description: Operações relacionadas a horários de empresas
+- name: Horários Populares
+  description: Operações relacionadas a horários populares
+paths:
+  /cliente/filtrar/:
+    get:
+      tags:
+      - Cliente
+      summary: Filtrar clientes
+      operationId: clienteFiltrarGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                name: João
+              - id: 2
+                name: Maria
+      x-swagger-router-controller: Cliente
+  /cliente/{cli_id}:
+    get:
+      tags:
+      - Cliente
+      summary: Obter cliente por ID
+      operationId: clienteCli_idGET
+      parameters:
+      - name: cli_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                name: João
+                email: joao@example.com
+      x-swagger-router-controller: Cliente
+    delete:
+      tags:
+      - Cliente
+      summary: Excluir cliente por ID
+      operationId: clienteCli_idDELETE
+      parameters:
+      - name: cli_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Cliente excluído
+      x-swagger-router-controller: Cliente
+  /cliente/:
+    get:
+      tags:
+      - Cliente
+      summary: Obter todos os clientes
+      operationId: clienteGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                name: João
+              - id: 2
+                name: Maria
+      x-swagger-router-controller: Cliente
+    put:
+      tags:
+      - Cliente
+      summary: Atualizar cliente
+      operationId: clientePUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                name: Novo Nome
+                email: novo@example.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Cliente atualizado
+      x-swagger-router-controller: Cliente
+    post:
+      tags:
+      - Cliente
+      summary: Inserir novo cliente
+      operationId: clientePOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Novo Cliente
+                email: novo@example.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Cliente Inserido
+      x-swagger-router-controller: Cliente
+  /cliente/login/{cli_login}:
+    get:
+      tags:
+      - Cliente
+      summary: Obter cliente por login
+      operationId: clienteLoginCli_loginGET
+      parameters:
+      - name: cli_login
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                name: João
+                email: joao@example.com
+      x-swagger-router-controller: Cliente
+  /cliente/login/{cli_nome}:
+    get:
+      tags:
+      - Cliente
+      summary: Obter cliente por nome
+      operationId: clienteLoginCli_nomeGET
+      parameters:
+      - name: cli_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 2
+                name: Maria
+                email: maria@example.com
+      x-swagger-router-controller: Cliente
+  /cliente/email/{cli_email}:
+    get:
+      tags:
+      - Cliente
+      summary: Obter cliente por e-mail
+      operationId: clienteEmailCli_emailGET
+      parameters:
+      - name: cli_email
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                name: João
+                email: joao@example.com
+      x-swagger-router-controller: Cliente
+  /cliente/grupo/{grc_nome}:
+    get:
+      tags:
+      - Cliente
+      summary: Obter clientes por nome de grupo
+      operationId: clienteGrupoGrc_nomeGET
+      parameters:
+      - name: grc_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                name: João
+              - id: 3
+                name: Carlos
+      x-swagger-router-controller: Cliente
+  /empresa/filtrar/e:
+    get:
+      tags:
+      - Empresas
+      summary: Filtrar empresas usando operador lógico "E"
+      operationId: empresaFiltrarEGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/filtrar/ou:
+    get:
+      tags:
+      - Empresas
+      summary: Filtrar empresas usando operador lógico "OU"
+      operationId: empresaFiltrarOuGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/{emp_id}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresa por ID
+      operationId: empresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                nome: Empresa A
+      x-swagger-router-controller: Empresas
+  /empresa/:
+    get:
+      tags:
+      - Empresas
+      summary: Obter todas as empresas
+      operationId: empresaGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+    put:
+      tags:
+      - Empresas
+      summary: Atualizar empresa
+      operationId: empresaPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                nome: Nova Empresa A
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Empresa atualizada
+      x-swagger-router-controller: Empresas
+    post:
+      tags:
+      - Empresas
+      summary: Inserir nova empresa
+      operationId: empresaPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/empresa_body'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Empresa Inserida
+      x-swagger-router-controller: Empresas
+  /empresa/horariosempresa/{emp_id}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter horários de uma empresa por ID
+      operationId: empresaHorariosempresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                dia: Segunda-feira
+                horario: 09:00 - 18:00
+              - id: 2
+                dia: Terça-feira
+                horario: 08:30 - 17:30
+      x-swagger-router-controller: Empresas
+  /empresa/nome/{emp_nome}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresa por nome
+      operationId: empresaNomeEmp_nomeGET
+      parameters:
+      - name: emp_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/segmento/{emp_segmento}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresas por segmento
+      operationId: empresaSegmentoEmp_segmentoGET
+      parameters:
+      - name: emp_segmento
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/setor/{emp_setor}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresas por setor
+      operationId: empresaSetorEmp_setorGET
+      parameters:
+      - name: emp_setor
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/experiencianaempresa/{ene_nome}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresas por nome de experiência na empresa
+      operationId: empresaExperiencianaempresaEne_nomeGET
+      parameters:
+      - name: ene_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/cargonaempresa/{cne_nome}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresas por nome de cargo na empresa
+      operationId: empresaCargonaempresaCne_nomeGET
+      parameters:
+      - name: cne_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /empresa/especializacao/{esp_nome}:
+    get:
+      tags:
+      - Empresas
+      summary: Obter empresas por nome de especialização
+      operationId: empresaEspecializacaoEsp_nomeGET
+      parameters:
+      - name: esp_nome
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Empresa A
+              - id: 2
+                nome: Empresa B
+      x-swagger-router-controller: Empresas
+  /lead/filtrar/:
+    get:
+      tags:
+      - Lead
+      summary: Filtrar leads
+      operationId: leadFiltrarGET
+      parameters:
+      - name: nome
+        in: query
+        description: Nome do lead
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+      x-swagger-router-controller: Lead
+  /lead/{lead_id}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por ID
+      operationId: leadLead_idGET
+      parameters:
+      - name: lead_id
+        in: path
+        description: ID do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+    delete:
+      tags:
+      - Lead
+      summary: Excluir lead por ID
+      operationId: leadLead_idDELETE
+      parameters:
+      - name: lead_id
+        in: path
+        description: ID do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/nome/{lead_nome}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por nome
+      operationId: leadNomeLead_nomeGET
+      parameters:
+      - name: lead_nome
+        in: path
+        description: Nome do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/cidade/{lead_cidade}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por cidade
+      operationId: leadCidadeLead_cidadeGET
+      parameters:
+      - name: lead_cidade
+        in: path
+        description: Nome da cidade do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/estado/{lead_estado}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por estado
+      operationId: leadEstadoLead_estadoGET
+      parameters:
+      - name: lead_estado
+        in: path
+        description: Estado do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/pais/{lead_pais}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por país
+      operationId: leadPaisLead_paisGET
+      parameters:
+      - name: lead_pais
+        in: path
+        description: País do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/titulo/{lead_titulo}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por título
+      operationId: leadTituloLead_tituloGET
+      parameters:
+      - name: lead_titulo
+        in: path
+        description: Título do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/email/{lead_email}:
+    get:
+      tags:
+      - Lead
+      summary: Obter lead por e-mail
+      operationId: leadEmailLead_emailGET
+      parameters:
+      - name: lead_email
+        in: path
+        description: E-mail do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/grupo/{grl_nome}:
+    get:
+      tags:
+      - Lead
+      summary: Obter leads por nome de grupo
+      operationId: leadGrupoGrl_nomeGET
+      parameters:
+      - name: grl_nome
+        in: path
+        description: Nome do grupo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/segment/{segment}:
+    get:
+      tags:
+      - Lead
+      summary: Obter leads por segmento
+      operationId: leadSegmentSegmentGET
+      parameters:
+      - name: segment
+        in: path
+        description: Segmento do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/role/{role}:
+    get:
+      tags:
+      - Lead
+      summary: Obter leads por papel
+      operationId: leadRoleRoleGET
+      parameters:
+      - name: role
+        in: path
+        description: Papel do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead/localization/{localization}:
+    get:
+      tags:
+      - Lead
+      summary: Obter leads por localização
+      operationId: leadLocalizationLocalizationGET
+      parameters:
+      - name: localization
+        in: path
+        description: Localização do lead
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /lead:
+    get:
+      tags:
+      - Lead
+      summary: Obter todos os leads
+      operationId: leadGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+                x-content-type: application/json
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+    put:
+      tags:
+      - Lead
+      summary: Atualizar lead
+      operationId: leadPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadUpdate'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+    post:
+      tags:
+      - Lead
+      summary: Inserir novo lead
+      operationId: leadPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadCreate'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Entrada inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Lead
+  /parametrobusca/{pab_id}:
+    delete:
+      tags:
+      - Parâmetros de Busca
+      summary: Excluir parâmetros de busca por ID
+      operationId: parametrobuscaPab_idDELETE
+      parameters:
+      - name: pab_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Parâmetros de busca excluído
+      x-swagger-router-controller: ParmetrosDeBusca
+  /parametrobusca:
+    put:
+      tags:
+      - Parâmetros de Busca
+      summary: Atualizar parâmetros de busca
+      operationId: parametrobuscaPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametrosBusca'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Parâmetros de busca atualizada
+      x-swagger-router-controller: ParmetrosDeBusca
+    post:
+      tags:
+      - Parâmetros de Busca
+      summary: Inserir novos parâmetros de busca
+      operationId: parametrobuscaPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametrosBusca'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Parâmetro de busca Inserido
+                ID: "14"
+      x-swagger-router-controller: ParmetrosDeBusca
+  /cargonaempresa/:
+    get:
+      tags:
+      - cargonaempresa
+      summary: Obtém todos os registros de cargo na empresa
+      operationId: cargonaempresaGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              example:
+              - id: 1
+                nome: Gerente
+              - id: 2
+                nome: Analista
+        "400":
+          description: Erro de entrada inválida
+          content:
+            application/json:
+              example:
+                message: Entrada Inválida
+      x-swagger-router-controller: Cargonaempresa
+  /contaslinkedinadmin/{cnl_id}:
+    get:
+      tags:
+      - ContasLinkedInAdmin
+      summary: Obter conta LinkedIn de administrador por ID
+      operationId: contaslinkedinadminCnl_idGET
+      parameters:
+      - name: cnl_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                login: admin@example.com
+      x-swagger-router-controller: ContasLinkedInAdmin
+    delete:
+      tags:
+      - ContasLinkedInAdmin
+      summary: Excluir conta LinkedIn de administrador por ID
+      operationId: contaslinkedinadminCnl_idDELETE
+      parameters:
+      - name: cnl_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Conta LinkedIn excluída com sucesso!
+      x-swagger-router-controller: ContasLinkedInAdmin
+  /contaslinkedinadmin/:
+    get:
+      tags:
+      - ContasLinkedInAdmin
+      summary: Obter todas as contas LinkedIn de administradores
+      operationId: contaslinkedinadminGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                login: admin@example.com
+              - id: 2
+                login: user@example.com
+      x-swagger-router-controller: ContasLinkedInAdmin
+    put:
+      tags:
+      - ContasLinkedInAdmin
+      summary: Atualizar conta LinkedIn de administrador
+      operationId: contaslinkedinadminPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                login: novo@example.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Conta LinkedIn atualizada
+      x-swagger-router-controller: ContasLinkedInAdmin
+    post:
+      tags:
+      - ContasLinkedInAdmin
+      summary: Inserir nova conta LinkedIn de administrador
+      operationId: contaslinkedinadminPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                login: novo@example.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Conta do LinkedIn Inserida
+      x-swagger-router-controller: ContasLinkedInAdmin
+  /emailsempresa/{emp_id}:
+    get:
+      tags:
+      - EmailsEmpresa
+      summary: Obter email associado a empresa por ID
+      operationId: emailsempresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                id: 1
+                email: contato@empresa.com
+      x-swagger-router-controller: EmailsEmpresa
+    delete:
+      tags:
+      - EmailsEmpresa
+      summary: Excluir associação de email com empresa por ID
+      operationId: emailsempresaEmp_idDELETE
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de Email com Empresa foi excluída
+      x-swagger-router-controller: EmailsEmpresa
+  /emailsempresa/:
+    get:
+      tags:
+      - EmailsEmpresa
+      summary: Obter todas as associações de email com empresas
+      operationId: emailsempresaGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: 1
+                email: contato@empresa.com
+              - id: 2
+                email: suporte@outraempresa.com
+      x-swagger-router-controller: EmailsEmpresa
+    put:
+      tags:
+      - EmailsEmpresa
+      summary: Atualizar associação de email com empresa
+      operationId: emailsempresaPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                email: novo@empresa.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de Email com Empresa foi atualizada
+      x-swagger-router-controller: EmailsEmpresa
+    post:
+      tags:
+      - EmailsEmpresa
+      summary: Associar novo email com empresa
+      operationId: emailsempresaPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: novo@empresa.com
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Email associado à empresa
+      x-swagger-router-controller: EmailsEmpresa
+  /emailsprovaveis/:
+    get:
+      summary: Obtém todos os registros de emails prováveis
+      operationId: emailsprovaveisGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              example:
+              - id: 1
+                email: exemplo1@example.com
+              - id: 2
+                email: exemplo2@example.com
+        "400":
+          description: Erro de entrada inválida
+          content:
+            application/json:
+              example:
+                message: Entrada Inválida
+      x-swagger-router-controller: Default
+  /especializacaoempresa/{emp_id}:
+    get:
+      tags:
+      - Especializações de Empresas
+      summary: Buscar especialização associada a uma empresa
+      operationId: especializacaoempresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - emp_id: 1
+                esp_nome: Especialização A
+                esp_active: true
+                esp_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: EspecializaesDeEmpresas
+    delete:
+      tags:
+      - Especializações de Empresas
+      summary: Excluir especialização associada a uma empresa
+      operationId: especializacaoempresaEmp_idDELETE
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de Especialização com Empresa foi excluída
+      x-swagger-router-controller: EspecializaesDeEmpresas
+  /especializacaoempresa/:
+    get:
+      tags:
+      - Especializações de Empresas
+      summary: Listar todas as especializações associadas a empresas
+      operationId: especializacaoempresaGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - emp_id: 1
+                esp_nome: Especialização A
+                esp_active: true
+                esp_insertdate: 2023-08-11T10:00:00Z
+              - emp_id: 2
+                esp_nome: Especialização B
+                esp_active: true
+                esp_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: EspecializaesDeEmpresas
+    put:
+      tags:
+      - Especializações de Empresas
+      summary: Atualizar especialização associada a uma empresa
+      operationId: especializacaoempresaPUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              emp_id: 1
+              esp_nome: Especialização Atualizada
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de Especialização com Empresa foi atualizada
+      x-swagger-router-controller: EspecializaesDeEmpresas
+    post:
+      tags:
+      - Especializações de Empresas
+      summary: Associar uma nova especialização a uma empresa
+      operationId: especializacaoempresaPOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              esp_nome: Especialização Nova
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Especialização associada à Empresa
+      x-swagger-router-controller: EspecializaesDeEmpresas
+  /experiencianaempresa/{ene_id}:
+    get:
+      tags:
+      - Experiências na Empresa
+      summary: Buscar experiência na empresa pelo ID
+      operationId: experiencianaempresaEne_idGET
+      parameters:
+      - name: ene_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - ene_id: 1
+                emp_id: 1
+                ene_nome: Experiência A
+                ene_active: true
+                ene_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: ExperinciasNaEmpresa
+  /experiencianaempresa/empresa/{emp_id}:
+    get:
+      tags:
+      - Experiências na Empresa
+      summary: Listar experiências na empresa por ID de empresa
+      operationId: experiencianaempresaEmpresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - ene_id: 1
+                emp_id: 1
+                ene_nome: Experiência A
+                ene_active: true
+                ene_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: ExperinciasNaEmpresa
+  /experiencianaempresa/:
+    get:
+      tags:
+      - Experiências na Empresa
+      summary: Listar todas as experiências na empresa
+      operationId: experiencianaempresaGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - ene_id: 1
+                emp_id: 1
+                ene_nome: Experiência A
+                ene_active: true
+                ene_insertdate: 2023-08-11T10:00:00Z
+              - ene_id: 2
+                emp_id: 2
+                ene_nome: Experiência B
+                ene_active: true
+                ene_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: ExperinciasNaEmpresa
+    put:
+      tags:
+      - Experiências na Empresa
+      summary: Atualizar experiência na empresa
+      operationId: experiencianaempresaPUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              emp_id: 1
+              ene_id: 1
+              ene_nome: Experiência Atualizada
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Experiência na Empresa foi atualizada
+      x-swagger-router-controller: ExperinciasNaEmpresa
+    post:
+      tags:
+      - Experiências na Empresa
+      summary: Inserir nova experiência na empresa
+      operationId: experiencianaempresaPOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              ene_nome: Nova Experiência
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Experiência na empresa inserida
+      x-swagger-router-controller: ExperinciasNaEmpresa
+  /experiencianaempresa/{emp_id}:
+    delete:
+      tags:
+      - Experiências na Empresa
+      summary: Excluir experiência na empresa por ID de empresa
+      operationId: experiencianaempresaEmp_idDELETE
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Experiência na Empresa foi excluída
+      x-swagger-router-controller: ExperinciasNaEmpresa
+  /formacao/{lead_id}:
+    get:
+      tags:
+      - Formações
+      summary: Buscar formações associadas a um lead pelo ID do lead
+      operationId: formacaoLead_idGET
+      parameters:
+      - name: lead_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - lead_id: 1
+                formacao: Graduação em Engenharia
+                form_active: true
+                form_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: Formaes
+    delete:
+      tags:
+      - Formações
+      summary: Excluir formação associada a um lead pelo ID do lead
+      operationId: formacaoLead_idDELETE
+      parameters:
+      - name: lead_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de lead com Formação foi excluída
+      x-swagger-router-controller: Formaes
+  /formacao/:
+    get:
+      tags:
+      - Formações
+      summary: Listar todas as formações associadas a leads
+      operationId: formacaoGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - lead_id: 1
+                formacao: Graduação em Engenharia
+                form_active: true
+                form_insertdate: 2023-08-11T10:00:00Z
+              - lead_id: 2
+                formacao: Pós-graduação em Administração
+                form_active: true
+                form_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: Formaes
+    put:
+      tags:
+      - Formações
+      summary: Atualizar formação associada a um lead
+      operationId: formacaoPUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              lead_id: 1
+              formacao: Nova Formação
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de lead com Formação foi atualizada
+      x-swagger-router-controller: Formaes
+    post:
+      tags:
+      - Formações
+      summary: Inserir nova formação associada a um lead
+      operationId: formacaoPOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              formacao: Mestrado em Ciência da Computação
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Formação associada ao Lead inserida
+      x-swagger-router-controller: Formaes
+  /grupocliente/{grc_id}:
+    get:
+      tags:
+      - Grupos de Clientes
+      summary: Buscar grupo de cliente pelo ID do grupo
+      operationId: grupoclienteGrc_idGET
+      parameters:
+      - name: grc_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - grc_id: 1
+                nome: Grupo A
+                grc_active: true
+                grc_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: GruposDeClientes
+    delete:
+      tags:
+      - Grupos de Clientes
+      summary: Excluir grupo de cliente pelo ID do grupo
+      operationId: grupoclienteGrc_idDELETE
+      parameters:
+      - name: grc_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-cliente foi excluído
+      x-swagger-router-controller: GruposDeClientes
+  /grupocliente/:
+    get:
+      tags:
+      - Grupos de Clientes
+      summary: Listar todos os grupos de clientes
+      operationId: grupoclienteGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - grc_id: 1
+                nome: Grupo A
+                grc_active: true
+                grc_insertdate: 2023-08-11T10:00:00Z
+              - grc_id: 2
+                nome: Grupo B
+                grc_active: true
+                grc_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: GruposDeClientes
+    put:
+      tags:
+      - Grupos de Clientes
+      summary: Atualizar grupo de cliente
+      operationId: grupoclientePUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              grc_id: 1
+              nome: Novo Nome
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-cliente foi atualizado
+      x-swagger-router-controller: GruposDeClientes
+    post:
+      tags:
+      - Grupos de Clientes
+      summary: Inserir novo grupo de cliente
+      operationId: grupoclientePOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              nome: Grupo C
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-cliente foi inserido
+      x-swagger-router-controller: GruposDeClientes
+  /grupolead/{grl_id}:
+    get:
+      tags:
+      - Grupos de Leads
+      summary: Buscar grupo de lead pelo ID do grupo
+      operationId: grupoleadGrl_idGET
+      parameters:
+      - name: grl_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - grl_id: 1
+                nome: Grupo A
+                grl_active: true
+                grl_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: GruposDeLeads
+    delete:
+      tags:
+      - Grupos de Leads
+      summary: Excluir grupo de lead pelo ID do grupo
+      operationId: grupoleadGrl_idDELETE
+      parameters:
+      - name: grl_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-lead foi excluído
+      x-swagger-router-controller: GruposDeLeads
+  /grupolead/:
+    get:
+      tags:
+      - Grupos de Leads
+      summary: Listar todos os grupos de leads
+      operationId: grupoleadGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - grl_id: 1
+                nome: Grupo A
+                grl_active: true
+                grl_insertdate: 2023-08-11T10:00:00Z
+              - grl_id: 2
+                nome: Grupo B
+                grl_active: true
+                grl_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: GruposDeLeads
+    put:
+      tags:
+      - Grupos de Leads
+      summary: Atualizar grupo de lead
+      operationId: grupoleadPUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              grl_id: 1
+              nome: Novo Nome
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-lead foi atualizado
+      x-swagger-router-controller: GruposDeLeads
+    post:
+      tags:
+      - Grupos de Leads
+      summary: Inserir novo grupo de lead
+      operationId: grupoleadPOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              nome: Grupo C
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Grupo-lead foi inserido
+      x-swagger-router-controller: GruposDeLeads
+  /horariosempresa/{emp_id}:
+    get:
+      tags:
+      - Horários de Empresas
+      summary: Buscar horários de empresa pelo ID da empresa
+      operationId: horariosempresaEmp_idGET
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - emp_id: 1
+                horario: 08:00 - 17:00
+                hem_active: true
+                hem_insertdate: 2023-08-11T10:00:00Z
+      x-swagger-router-controller: HorriosDeEmpresas
+    delete:
+      tags:
+      - Horários de Empresas
+      summary: Excluir horários de empresa pelo ID da empresa
+      operationId: horariosempresaEmp_idDELETE
+      parameters:
+      - name: emp_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de horários de empresa com empresa foi excluída
+      x-swagger-router-controller: HorriosDeEmpresas
+  /horariosempresa/:
+    get:
+      tags:
+      - Horários de Empresas
+      summary: Listar todos os horários de empresas
+      operationId: horariosempresaGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - emp_id: 1
+                horario: 08:00 - 17:00
+                hem_active: true
+                hem_insertdate: 2023-08-11T10:00:00Z
+              - emp_id: 2
+                horario: 09:00 - 18:00
+                hem_active: true
+                hem_insertdate: 2023-08-11T11:00:00Z
+      x-swagger-router-controller: HorriosDeEmpresas
+    put:
+      tags:
+      - Horários de Empresas
+      summary: Atualizar horários de empresa
+      operationId: horariosempresaPUT
+      requestBody:
+        content:
+          application/json:
+            example:
+              emp_id: 1
+              horario: 09:00 - 18:00
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Associação de horários de empresa com empresa foi atualizada
+      x-swagger-router-controller: HorriosDeEmpresas
+    post:
+      tags:
+      - Horários de Empresas
+      summary: Inserir novos horários de empresa
+      operationId: horariosempresaPOST
+      requestBody:
+        content:
+          application/json:
+            example:
+              horario: 08:00 - 17:00
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                message: Horários de empresa associados à empresa foram inseridos
+      x-swagger-router-controller: HorriosDeEmpresas
+  /horariospopulares/:
+    get:
+      tags:
+      - Horários Populares
+      summary: Listar todos os horários populares
+      operationId: horariospopularesGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+              - horario: 08:00 - 17:00
+              - horario: 09:00 - 18:00
+      x-swagger-router-controller: HorriosPopulares
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+    Empresa:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+    HorarioEmpresa:
+      type: object
+      properties:
+        id:
+          type: integer
+        dia:
+          type: string
+        horario:
+          type: string
+    Lead:
+      type: object
+      properties:
+        lead_id:
+          type: string
+        lead_nome:
+          type: string
+        lead_cidade:
+          type: string
+        lead_estado:
+          type: string
+        lead_pais:
+          type: string
+        lead_titulo:
+          type: string
+      example:
+        lead_titulo: lead_titulo
+        lead_estado: lead_estado
+        lead_nome: lead_nome
+        lead_cidade: lead_cidade
+        lead_pais: lead_pais
+        lead_id: lead_id
+    LeadUpdate:
+      type: object
+      properties:
+        lead_id:
+          type: string
+          example: joaodasilva
+        lead_nome:
+          type: string
+          example: João da Silva
+        lead_cidade:
+          type: string
+          example: São Paulo
+        lead_estado:
+          type: string
+          example: SP
+        lead_pais:
+          type: string
+          example: Brasil
+        lead_titulo:
+          type: string
+          example: Gerente de Vendas
+    LeadCreate:
+      type: object
+      properties:
+        lead_id:
+          type: string
+          example: maria_souza
+        lead_nome:
+          type: string
+          example: Maria Souza
+        lead_cidade:
+          type: string
+          example: Rio de Janeiro
+        lead_estado:
+          type: string
+          example: RJ
+        lead_pais:
+          type: string
+          example: Brasil
+        lead_titulo:
+          type: string
+          example: Analista de Marketing
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: message
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    ParametrosBusca:
+      type: object
+      properties:
+        segment:
+          type: string
+        role:
+          type: string
+        localization:
+          type: string
+    CargoNaEmpresa:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+    ContaLinkedInAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        senha:
+          type: string
+    EmailEmpresa:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+    Formacao:
+      type: object
+      properties:
+        lead_id:
+          type: integer
+        formacao:
+          type: string
+        form_active:
+          type: boolean
+        form_insertdate:
+          type: string
+          format: date-time
+    GrupoCliente:
+      type: object
+      properties:
+        grc_id:
+          type: integer
+        nome:
+          type: string
+        grc_active:
+          type: boolean
+        grc_insertdate:
+          type: string
+          format: date-time
+    GrupoLead:
+      type: object
+      properties:
+        grl_id:
+          type: integer
+        nome:
+          type: string
+        grl_active:
+          type: boolean
+        grl_insertdate:
+          type: string
+          format: date-time
+    HorariosEmpresa:
+      type: object
+      properties:
+        emp_id:
+          type: integer
+        horario:
+          type: string
+        hem_active:
+          type: boolean
+        hem_insertdate:
+          type: string
+          format: date-time
+    HorariosPopulares:
+      type: object
+      properties:
+        horario:
+          type: string
+    empresa_body:
+      type: object
+      properties:
+        emp_id:
+          type: string
+        emp_nome:
+          type: string
+        emp_titulo:
+          type: string
+        emp_segmento:
+          type: string
+        emp_localizacao:
+          type: string
+        emp_seguidores:
+          type: integer
+        emp_setor:
+          type: string
+        emp_insertdate:
+          type: string
+      example:
+        emp_id: empresa_xpto
+        emp_nome: Empresa XPTO
+        emp_titulo: Empresa de Tecnologia
+        emp_segmento: Assistência Técnica
+        emp_localizacao: São Paulo
+        emp_seguidores: 1000
+        emp_setor: Tecnologia
+        emp_insertdate: 2023-08-11T12:00:00Z
